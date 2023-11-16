@@ -15,6 +15,8 @@ class Custom_Field_Suite
     public $form;
     public $fields;
     public $field_group;
+    public $validators;
+    public $group_ids;
     private static $instance;
 
 
