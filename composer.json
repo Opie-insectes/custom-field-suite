@@ -17,5 +17,13 @@
   },
   "require": {
     "composer/installers": "~1.0"
+  },
+  "require-dev": {
+    "php-stubs/wordpress-stubs": "^6.4"
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true
+    }
   }
 }

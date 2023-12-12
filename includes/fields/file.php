@@ -2,17 +2,21 @@
 
 class cfs_file extends cfs_field
 {
+    public $name;
+    public $label;
+    public $value;
 
     function __construct() {
         $this->name = 'file';
         $this->label = __( 'File Upload', 'cfs' );
+        $this->value = '';
     }
 
 
     function html( $field ) {
         $file_url = $field->value;
 
-        if ( ctype_digit( $field->value ) ) {
+        if ( isset($field->value) && $field->value !== null && ctype_digit( $field->value ) ) {
             if ( wp_attachment_is_image( $field->value ) ) {
                 $file_url = wp_get_attachment_image_src( $field->value );
                 $file_url = '<img src="' . $file_url[0] . '" />';
@@ -109,7 +113,7 @@ class cfs_file extends cfs_field
         .cfs_frame .media-frame-menu {
             display: none;
         }
-        
+
         .cfs_frame .media-frame-title,
         .cfs_frame .media-frame-router,
         .cfs_frame .media-frame-content,

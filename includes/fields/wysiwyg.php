@@ -6,9 +6,6 @@ class cfs_wysiwyg extends cfs_field
     function __construct() {
         $this->name = 'wysiwyg';
         $this->label = __( 'Wysiwyg Editor', 'cfs' );
-
-        // add the "code" button
-        add_filter( 'mce_external_plugins', [ $this, 'mce_external_plugins' ], 20 );
     }
 
 
@@ -110,7 +107,7 @@ class cfs_wysiwyg extends cfs_field
                     // set the wysiwyg css id
                     $(this).find('.wysiwyg').attr('id', input_id);
                     $(this).find('a.add_media').attr('data-editor', input_id);
-                    
+
                     // if all editors on page are in 'text' tab, tinyMCE.settings will not be set
                     if ('undefined' == typeof tinyMCE.settings) {
 
@@ -124,10 +121,10 @@ class cfs_wysiwyg extends cfs_field
                                 wpautop : true,
                                 resize : 'vertical',
                                 toolbar2 : 'code'
-                            };  
+                            };
                         }
                     }
-                    
+
                     // add the "code" button
                     if ('undefined' !== typeof tinyMCE.settings.toolbar2) {
                         if (tinyMCE.settings.toolbar2.indexOf('code') < 0) {
@@ -138,15 +135,6 @@ class cfs_wysiwyg extends cfs_field
                     // create wysiwyg
                     wpautop = tinyMCE.settings.wpautop;
                     resize = tinyMCE.settings.resize;
-                    
-                    if (tinyMCE.settings.plugins){
-                        if ( tinyMCE.settings.plugins.indexOf('code,link') === -1 ){
-                            tinyMCE.settings.plugins = tinyMCE.settings.plugins + ',code,link';
-                        }
-                    } else {
-                        tinyMCE.settings.plugins = 'code,link';
-                    }
-
                     tinyMCE.settings.wpautop = false;
                     tinyMCE.settings.resize = 'vertical';
                     tinyMCE.execCommand('mceAddEditor', false, input_id);
@@ -174,14 +162,6 @@ class cfs_wysiwyg extends cfs_field
         </script>
     <?php
         }
-    }
-
-
-    function mce_external_plugins( $plugins ) {
-        if ( version_compare( get_bloginfo( 'version' ), '3.9', '>=' ) ) {
-            $plugins['code'] = CFS_URL . '/assets/js/tinymce/code.min.js';
-        }
-        return $plugins;
     }
 
 
